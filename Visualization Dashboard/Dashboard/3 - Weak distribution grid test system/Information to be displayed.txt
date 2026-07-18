@@ -1,0 +1,19 @@
+Backward - Forward Sweep Loadflow analysis
+
+11 kV Distribution Network
+Transformer rating = 10 MVA
+
+Cable – 360 mm² AAAC
+Ampacity = 525 A
+
+Domestic Load = 9.18 MVA
+0.85 p.f. 
+
+Total PV Capacity = 5 MWp
+50 % Penetration
+
+40 EVs per aggregation 
+11 kW chargers
+
+5 Aggregations
+22 % penetration
