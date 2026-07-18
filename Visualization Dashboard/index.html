@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FYP — Coordinated EV Charging Dashboard</title>
+
+  <link rel="stylesheet" href="css/theme.css?v=6" />
+  <link rel="stylesheet" href="css/layout.css?v=6" />
+  <link rel="stylesheet" href="css/components.css?v=6" />
+</head>
+<body>
+  <!-- Sidebar navigation -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar__brand">
+      <span class="sidebar__brand-mark">EV</span>
+      <div class="sidebar__brand-text">
+        <strong>Coordinated EV Charging</strong>
+        <small>FYP Presentation</small>
+      </div>
+    </div>
+    <nav id="nav" class="nav" aria-label="Section navigation"></nav>
+    <div class="sidebar__foot">
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle colour theme">
+        <span class="theme-toggle__icon"></span>
+        <span class="theme-toggle__label">Theme</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile / narrow top bar -->
+  <header class="topbar">
+    <button id="menu-toggle" class="icon-btn" type="button" aria-label="Open navigation">☰</button>
+    <span id="topbar-title" class="topbar__title">Overview</span>
+  </header>
+
+  <!-- Main stage: one section visible at a time -->
+  <main id="stage" class="stage" tabindex="-1"></main>
+
+  <!-- Prev / Next presentation controls -->
+  <div class="pager">
+    <button id="prev-btn" class="pager__btn" type="button" aria-label="Previous section">‹ Prev</button>
+    <span id="pager-label" class="pager__label"></span>
+    <button id="next-btn" class="pager__btn" type="button" aria-label="Next section">Next ›</button>
+  </div>
+
+  <!-- Lightbox overlay -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Figure viewer">
+    <div class="lightbox__bar">
+      <span id="lightbox-title" class="lightbox__title"></span>
+      <div class="lightbox__tools">
+        <button data-lb="zoom-out" class="icon-btn" type="button" aria-label="Zoom out">−</button>
+        <button data-lb="zoom-reset" class="icon-btn" type="button" aria-label="Reset zoom">⤢</button>
+        <button data-lb="zoom-in" class="icon-btn" type="button" aria-label="Zoom in">+</button>
+        <button data-lb="close" class="icon-btn" type="button" aria-label="Close (Esc)">✕</button>
+      </div>
+    </div>
+    <button data-lb="prev" class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous figure">‹</button>
+    <div id="lightbox-stage" class="lightbox__stage">
+      <img id="lightbox-img" class="lightbox__img" alt="" draggable="false" />
+    </div>
+    <button data-lb="next" class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next figure">›</button>
+    <div id="lightbox-caption" class="lightbox__caption"></div>
+  </div>
+
+  <div id="nav-scrim" class="nav-scrim" hidden></div>
+
+  <!-- Data + scripts (classic scripts so the page runs from file://) -->
+  <script src="manifest.js?v=6"></script>
+  <script src="js/theme.js?v=6"></script>
+  <script src="js/lightbox.js?v=6"></script>
+  <script src="js/tabs.js?v=6"></script>
+  <script src="js/gallery.js?v=6"></script>
+  <script src="js/render.js?v=6"></script>
+  <script src="js/navigation.js?v=6"></script>
+  <script src="js/main.js?v=6"></script>
+</body>
+</html>

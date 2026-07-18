@@ -1,0 +1,216 @@
+/* ============================================================
+   layout.css — app shell: sidebar, stage, pager, topbar
+   ============================================================ */
+
+body {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "sidebar stage"
+    "sidebar pager";
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Sidebar                                                             */
+/* ------------------------------------------------------------------ */
+.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  min-height: 0;
+  z-index: 30;
+  position: relative;
+}
+
+/* Thin gradient stripe at the very top — animated shimmer */
+.sidebar::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg,
+    #2563eb 0%, #7c3aed 28%, #06b6d4 55%, #7c3aed 78%, #2563eb 100%);
+  background-size: 200% 100%;
+  animation: shimmer-slide 4s linear infinite;
+  flex: none;
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-4) var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar__brand-mark {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--gradient);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.35);
+  animation: pulse-glow 3.5s ease-in-out infinite;
+}
+
+.sidebar__brand-text { display: flex; flex-direction: column; line-height: 1.25; }
+.sidebar__brand-text strong { font-size: 14px; font-weight: 700; }
+.sidebar__brand-text small { color: var(--text-faint); font-size: 11px; margin-top: 1px; }
+
+.nav {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--sp-3) var(--sp-2);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.sidebar__foot {
+  border-top: 1px solid var(--border);
+  padding: var(--sp-3);
+  background: var(--bg-inset);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Stage                                                               */
+/* ------------------------------------------------------------------ */
+.stage {
+  grid-area: stage;
+  min-height: 0;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding: var(--sp-7) var(--sp-7) var(--sp-8);
+  outline: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  background:
+    radial-gradient(ellipse 55% 65% at 18% 30%, rgba(37,99,235,0.040) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 60% at 85% 80%, rgba(124,58,237,0.032) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 45% at 55% 5%,  rgba(6,182,212,0.024) 0%, transparent 60%),
+    var(--bg);
+  background-size: 250% 250%;
+  animation: bg-drift 35s ease-in-out infinite;
+}
+[data-theme="dark"] .stage {
+  background:
+    radial-gradient(ellipse 55% 65% at 18% 30%, rgba(37,99,235,0.060) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 60% at 85% 80%, rgba(124,58,237,0.048) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 45% at 55% 5%,  rgba(6,182,212,0.034) 0%, transparent 60%),
+    var(--bg);
+  background-size: 250% 250%;
+  animation: bg-drift 35s ease-in-out infinite;
+}
+
+.section-page { max-width: var(--stage-max); margin: 0 auto; }
+
+/* Section page entrance — triggered by JS after each navigation */
+.section-page.page-entered {
+  animation: page-enter 0.45s var(--ease) both;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Pager                                                               */
+/* ------------------------------------------------------------------ */
+.pager {
+  grid-area: pager;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-5);
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.pager__label {
+  color: var(--text-faint);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.pager__btn {
+  appearance: none;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font: inherit;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 7px var(--sp-4);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+.pager__btn:hover:not(:disabled) {
+  background: var(--gradient);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.30);
+}
+.pager__btn:active:not(:disabled) { transform: translateY(1px); }
+.pager__btn:disabled { opacity: 0.35; cursor: default; }
+
+/* ------------------------------------------------------------------ */
+/*  Topbar (narrow screens)                                             */
+/* ------------------------------------------------------------------ */
+.topbar {
+  display: none;
+  grid-area: stage;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.topbar__title { font-weight: 700; font-size: 15px; }
+
+.nav-scrim {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  z-index: 25;
+  backdrop-filter: blur(2px);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Responsive                                                          */
+/* ------------------------------------------------------------------ */
+@media (max-width: 900px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "topbar" "stage" "pager";
+  }
+  .topbar { display: flex; }
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: min(86vw, var(--sidebar-w));
+    transform: translateX(-100%);
+    transition: transform var(--dur) var(--ease);
+    box-shadow: var(--shadow-3);
+  }
+  body.nav-open .sidebar { transform: translateX(0); }
+  .stage { padding: var(--sp-5) var(--sp-4) var(--sp-7); }
+  .pager { padding: var(--sp-3) var(--sp-4); }
+}
