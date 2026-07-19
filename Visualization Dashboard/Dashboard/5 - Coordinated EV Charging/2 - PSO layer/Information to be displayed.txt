@@ -1,0 +1,13 @@
+Cost Evaluation
+
+Objective Function
+Minimizes the power lost in the network, and
+the voltage fluctuations and maximizes the
+satisfied EV energy demand.
+
+Constraints
+Voltage limits, transformer loading and line
+loadings
+
+Decision Variable
+Number of Chargers at each Aggregation

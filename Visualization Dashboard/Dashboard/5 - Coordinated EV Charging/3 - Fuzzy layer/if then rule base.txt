@@ -1,0 +1,9 @@
+If energy demand is high, time left is low, and fairness is any value, then the priority is high because the EV urgently needs energy and is close to departure.
+
+If energy demand is high, time left is high, and fairness is low, then the priority is low because there is sufficient time available and the EV has just arrived.
+
+If energy demand is high, time left is high, and fairness is high, then the priority is high because fairness considerations increase the priority despite available time.
+
+If energy demand is low, time left is low, and fairness is high, then the priority is medium because the EV is nearly charged but has waited for a long time.
+
+If energy demand is low, time left is any value, and fairness is low or medium, then the priority is low because the EV does not require much energy and has not waited long enough to justify higher priority.

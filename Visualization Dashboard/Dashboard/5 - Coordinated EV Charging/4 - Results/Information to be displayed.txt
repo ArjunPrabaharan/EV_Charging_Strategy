@@ -1,0 +1,5 @@
+Total EV Energy Consumption = 11437.25 kWh
+
+Total Charging Cost = 365854.50 LKR
+
+Total Energy Lost = 2351.54 kWh
